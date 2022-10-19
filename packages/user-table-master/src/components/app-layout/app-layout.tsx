@@ -3,7 +3,7 @@ import { Layout, Menu } from 'antd';
 
 import { IAppLayoutProps } from './types';
 
-import './remote-decl.d.ts';
+import './../../remote-decl.d.ts';
 import './app-layout.less';
 const HelloWorld = React.lazy(() => import('hello_world/HelloWorld'));
 

@@ -97,7 +97,7 @@ export const UsersTable = React.memo(({ loading, users }: IUsersTableProps) => {
           title='Edit user'
           centered
           footer={null}
-          visible={modalState.isModalOpen}
+          open={modalState.isModalOpen}
           onOk={() => setModalState({ ...modalState, isModalOpen: false })}
           onCancel={() => setModalState({ ...modalState, isModalOpen: false })}
           destroyOnClose
