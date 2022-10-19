@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import { Form, Input, Button, DatePicker } from 'antd';
 import {
   UserOutlined,
@@ -10,17 +10,14 @@ import moment from 'moment';
 
 const dateFormat = 'DD.MM.YYYY';
 
-import { IUserFormFields } from '../../models';
+import { IUserFormFields } from '../../../models';
 
-interface UserEditingFormProps {
-  fields: IUserFormFields;
-  onSave: (values: IUserFormFields) => void;
-}
+import { UserEditingFormProps } from './types';
 
 export const UserEditingForm = ({ fields, onSave }: UserEditingFormProps) => {
-  const onFinish = (values: IUserFormFields) => {
+  const onFinish = useCallback((values: IUserFormFields) => {
     onSave(values);
-  };
+  }, []);
 
   return (
     <Form

@@ -11,32 +11,29 @@ import { IUser, IUserFormFields } from '../../models';
 import { IUsersTableProps } from './types';
 import { useAppDispatch } from './../../store';
 
-import { RegisteredRenderer } from './registered-renderer';
-import { UserEditingForm } from './user-editing-form';
+import { RegisteredRenderer } from './registered-renderer/registered-renderer';
+import { UserEditingForm } from './user-editing-form/user-editing-form';
 import { setUser } from './../../store/users/actions';
 
 import moment from 'moment';
 
 import './users-table.less';
 
+const HEIGHTDELTA = 39; // 39 - высота заголовка таблицы
+
 export const UsersTable = React.memo(({ loading, users }: IUsersTableProps) => {
+  const [height, setTableHeight] = useState(undefined);
   const [modalState, setModalState] = useState({
     isModalOpen: false,
     selectedUser: undefined,
   });
-  const [height, setTableHeight] = useState(undefined);
 
   const dispatch = useAppDispatch();
+  const ref = useRef();
 
   const openModal = useCallback((user: IUser) => {
     setModalState({ isModalOpen: true, selectedUser: user });
   }, []);
-
-  const ref = useRef();
-
-  useEffect(() => {
-    ref.current = modalState.selectedUser;
-  }, [modalState.selectedUser]);
 
   const onSave = useCallback((values: IUserFormFields) => {
     setModalState({ isModalOpen: false, selectedUser: ref.current });
@@ -53,8 +50,6 @@ export const UsersTable = React.memo(({ loading, users }: IUsersTableProps) => {
       dispatch(setUser(newUser));
     }
   }, []);
-
-  const heighDelta = 39; // 39 - высота заголовка таблицы
 
   const formFieldsData: IUserFormFields = useMemo(() => {
     if (modalState.selectedUser) {
@@ -76,10 +71,14 @@ export const UsersTable = React.memo(({ loading, users }: IUsersTableProps) => {
     }
   }, [modalState.selectedUser]);
 
+  useEffect(() => {
+    ref.current = modalState.selectedUser;
+  }, [modalState.selectedUser]);
+
   return (
     <ResizeObserver
       onResize={({ height: componentHeight }) =>
-        setTableHeight(Math.max(0, componentHeight - heighDelta))
+        setTableHeight(Math.max(0, componentHeight - HEIGHTDELTA))
       }
     >
       <div className='users-table'>
