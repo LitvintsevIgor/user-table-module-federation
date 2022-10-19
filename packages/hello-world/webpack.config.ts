@@ -1,7 +1,6 @@
 import path from 'path';
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { ModuleFederationPlugin } = require('webpack').container;
-// const deps = require('./package.json').dependencies;
 
 module.exports = {
   devServer: {
@@ -31,6 +30,10 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
       },
     ],
   },

@@ -1,10 +1,15 @@
 import React from 'react';
 
+import './helloWorld.css';
+
 const HelloWorld = () => {
   return (
-    <div>
-      <button onClick={() => console.log('Hello world')}>Say hello!</button>
-    </div>
+    <button
+      className='helloWorldButton'
+      onClick={() => console.log('Hello world')}
+    >
+      SAY HELLO
+    </button>
   );
 };
 

@@ -36,7 +36,9 @@ export const AppLayout = ({ children, actions }: IAppLayoutProps) => {
       <Layout>
         <Layout.Sider className='app-layout-sider' width={350}>
           <Suspense fallback={'loading...'}>
-            <HelloWorld />
+            <div className='hello-world-wrapper'>
+              <HelloWorld />
+            </div>
           </Suspense>
         </Layout.Sider>
         <Layout.Content className='app-layout-content'>
